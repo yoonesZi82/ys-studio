@@ -1,22 +1,18 @@
 import "./globals.css";
+import "flag-icons/css/flag-icons.min.css";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter } from "next/font/google";
+import { Vazirmatn } from "next/font/google";
 import { cn } from "@/lib/utils";
 import QueryProvider from "@/providers/query-provider";
 import { ThemeProvider } from "@/providers/theme-provider";
 import NextIntelProvider from "@/providers/next-intel-provider";
 import { Toaster } from "sonner";
+import { DirectionProvider } from "@/components/ui/direction";
+import NavbarMenu from "@/components/navbar-menu/NavbarMenu";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const vazirmatn = Vazirmatn({
+  subsets: ["arabic"],
+  variable: "--font-vazir",
 });
 
 export const metadata: Metadata = {
@@ -39,27 +35,32 @@ export default async function RootLayout({
       className={cn(
         "h-full",
         "antialiased",
-        geistSans.variable,
-        geistMono.variable,
-        "font-sans",
-        inter.variable,
+        vazirmatn.variable,
+        locale === "fa" ? "font-vazir" : "font-sans",
       )}
+      dir={locale === "fa" ? "rtl" : "ltr"}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
-        <QueryProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <NextIntelProvider locale={locale}>
-              {children}
-              <Toaster />
-            </NextIntelProvider>
-          </ThemeProvider>
-        </QueryProvider>
+        <DirectionProvider
+          dir={locale === "fa" ? "rtl" : "ltr"}
+          direction={locale === "fa" ? "rtl" : "ltr"}
+        >
+          <QueryProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <NextIntelProvider locale={locale}>
+                <NavbarMenu />
+                {children}
+                <Toaster />
+              </NextIntelProvider>
+            </ThemeProvider>
+          </QueryProvider>
+        </DirectionProvider>
       </body>
     </html>
   );

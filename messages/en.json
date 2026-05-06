@@ -1,5 +1,23 @@
 {
-  "HomePage": {
-    "title": "Hello world!"
+  "navbar": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "contact": "Contact"
+  },
+  "hero": {
+    "badge": "Full Stack Engineer - Production Ready",
+    "heading": {
+      "line1": "Building",
+      "line1Highlight": "End-to-End",
+      "line2": "Web Solutions",
+      "line3": "That Scale"
+    },
+    "description": "From pixel-perfect frontends to robust backend architectures. I craft complete digital experiences with modern tech stacks and best practices.",
+    "buttons": {
+      "startProject": "Start Project",
+      "viewPortfolio": "View Portfolio"
+    }
   }
 }
