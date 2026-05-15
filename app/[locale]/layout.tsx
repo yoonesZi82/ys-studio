@@ -55,7 +55,7 @@ export default async function RootLayout({
             >
               <NextIntelProvider locale={locale}>
                 <NavbarMenu />
-                {children}
+                <main className="mt-12 mb-4 lg:mt-26">{children}</main>
                 <Toaster />
               </NextIntelProvider>
             </ThemeProvider>

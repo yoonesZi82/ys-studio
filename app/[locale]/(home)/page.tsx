@@ -1,11 +1,13 @@
+import AboutMe from "./components/about-me/AboutMe";
 import HeroSection from "./components/hero-section/HeroSection";
+import SummaryProjects from "./components/summary-projects/SummaryProjects";
 
 function page() {
   return (
-    <div className="mt-12 lg:mt-26">
-      <div className="container">
-        <HeroSection />
-      </div>
+    <div className="container">
+      <HeroSection />
+      <AboutMe />
+      <SummaryProjects />
     </div>
   );
 }
