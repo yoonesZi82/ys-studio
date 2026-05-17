@@ -7,7 +7,10 @@ import InfoPart from "./components/info-part/InfoPart";
 
 function HeroSection() {
   return (
-    <section className="w-full flex justify-between gap-8 flex-col lg:flex-row items-center lg:items-start py-12">
+    <section
+      id="home"
+      className="w-full scroll-mt-24 flex justify-between gap-8 flex-col lg:flex-row items-center lg:items-start py-12"
+    >
       <InfoPart />
       <div className="w-full flex justify-center items-center">
         <Terminal className="-rotate-2 w-full">

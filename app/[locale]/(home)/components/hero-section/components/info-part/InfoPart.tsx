@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 function InfoPart() {
   const t = useTranslations("hero");
@@ -37,17 +38,22 @@ function InfoPart() {
 
       {/* Buttons */}
       <div className="flex flex-wrap gap-4">
-        <Button size="lg" className="px-8 py-6  text-base">
-          <Rocket className="mr-2 size-5" />
-          {t("buttons.startProject")}
+        <Button size="lg" className="px-8 py-6  text-base" asChild>
+          <Link href="#contact-me">
+            <Rocket className="mr-2 size-5" />
+            {t("buttons.startProject")}
+          </Link>
         </Button>
         <Button
           size="lg"
           variant="outline"
           className="border-foreground/20 hover:bg-foreground/5 font-mono uppercase tracking-wider px-8 py-6 text-base"
+          asChild
         >
-          <Code2 className="mr-2 size-5" />
-          {t("buttons.viewPortfolio")}
+          <Link href="#projects">
+            <Code2 className="mr-2 size-5" />
+            {t("buttons.viewProjects")}
+          </Link>
         </Button>
       </div>
     </div>

@@ -2,9 +2,8 @@
   "navbar": {
     "home": "Home",
     "about": "About",
-    "services": "Services",
-    "portfolio": "Portfolio",
-    "contact": "Contact"
+    "projects": "projects",
+    "contact-me": "Contact me"
   },
   "hero": {
     "badge": "Full Stack Engineer - Production Ready",
@@ -17,7 +16,7 @@
     "description": "From pixel-perfect frontends to robust backend architectures. I craft complete digital experiences with modern tech stacks and best practices.",
     "buttons": {
       "startProject": "Start Project",
-      "viewPortfolio": "View Portfolio"
+      "viewProjects": "View Projects"
     }
   }
 }

@@ -8,7 +8,6 @@ export function proxy(request: NextRequest) {
 
   let locale = cookieLocale;
 
-  // اگر cookie نبود → از browser بگیر
   if (!locale) {
     const acceptLang = request.headers.get("accept-language");
     if (acceptLang?.startsWith("fa")) {
@@ -18,7 +17,6 @@ export function proxy(request: NextRequest) {
     }
   }
 
-  // 👇 این مهمه: rewrite بدون تغییر URL
   return NextResponse.rewrite(
     new URL(`/${locale}${request.nextUrl.pathname}`, request.url),
   );

@@ -38,7 +38,7 @@ function ChangeLanguage() {
           <ChevronDown size={16} />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-40 p-2">
+      <PopoverContent className="w-40 p-2 z-1000">
         <div className="flex flex-col gap-1">
           <Button
             variant="ghost"

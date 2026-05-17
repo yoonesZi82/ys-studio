@@ -3,14 +3,7 @@ import React, { useState } from "react";
 import ChangeTheme from "../change-theme/ChangeTheme";
 import ChangeLanguage from "../change-language/ChangeLanguage";
 import { useTranslations } from "next-intl";
-import {
-  Menu,
-  House,
-  User,
-  BriefcaseBusiness,
-  FolderKanban,
-  Mail,
-} from "lucide-react";
+import { Menu, House, User, FolderKanban, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -37,9 +30,8 @@ function NavbarMenu() {
   const navLinks = [
     { href: "#home", label: t("home"), icon: House },
     { href: "#about", label: t("about"), icon: User },
-    { href: "#services", label: t("services"), icon: BriefcaseBusiness },
-    { href: "#portfolio", label: t("portfolio"), icon: FolderKanban },
-    { href: "#contact", label: t("contact"), icon: Mail },
+    { href: "#projects", label: t("projects"), icon: FolderKanban },
+    { href: "#contact-me", label: t("contact-me"), icon: Mail },
   ];
 
   const handleLinkClick = () => setOpen(false);

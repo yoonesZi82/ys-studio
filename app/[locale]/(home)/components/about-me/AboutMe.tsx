@@ -24,16 +24,20 @@ const skills = [
 
 function AboutMe() {
   return (
-    <div className="w-full flex flex-col lg:flex-row gap-3 lg:gap-20">
-      <div className="flex-[0.6] overflow-hidden h-100 rounded-lg border border-border shadow-sm relative">
-        <Image
-          src="/miles.png"
-          alt="miles"
-          fill
-          sizes="(max-width: 1024px) 100vw, 40vw"
-          className="object-cover"
-        />
-      </div>
+    <section
+      id="about"
+      className="w-full flex flex-col lg:flex-row gap-3 lg:gap-20 scroll-mt-24"
+    >
+      {/* <div className="flex-[0.6] overflow-hidden h-[300px] md:h-[500px] rounded-lg border border-border shadow-sm relative"> */}
+      <Image
+        src="/miles.png"
+        alt="miles"
+        width={500}
+        height={500}
+        className="object-cover flex-[0.6] border border-border shadow-sm rounded-xl"
+        loading="eager"
+      />
+      {/* </div> */}
 
       <div className="w-full justify-center flex-1 flex flex-col gap-4">
         <div className="space-y-2">
@@ -63,7 +67,7 @@ function AboutMe() {
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

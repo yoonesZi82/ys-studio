@@ -113,7 +113,7 @@
   --card-foreground: oklch(0.9288 0.0126 255.5078);
   --popover: oklch(0.2603 0 0);
   --popover-foreground: oklch(0.7348 0 0);
-  --primary: oklch(0.4365 0.1044 156.7556);
+  --primary: oklch(43.652% 0.10439 156.78);
   --primary-foreground: oklch(0.9213 0.0135 167.1556);
   --secondary: oklch(0.2603 0 0);
   --secondary-foreground: oklch(0.9851 0 0);
@@ -240,6 +240,10 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -259,4 +263,53 @@
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 5s linear infinite;
+}
+
+.react-tel-input .form-control {
+  background: transparent !important;
+  color: hsl(var(--foreground)) !important;
+  border-color: hsl(var(--border)) !important;
+}
+
+.react-tel-input .flag-dropdown {
+  background: transparent !important;
+  border-color: hsl(var(--border)) !important;
+  border-left: 0px !important;
+  border-top: 0px !important;
+  border-bottom: 0px !important;
+}
+
+.react-tel-input .country-list {
+  background: transparent !important;
+  color: hsl(var(--popover-foreground)) !important;
+}
+
+.react-tel-input .country:hover {
+  background: hsl(var(--accent)) !important;
+}
+.react-tel-input .selected-flag:hover {
+  background: transparent !important;
+}
+
+.react-tel-input .flag-dropdown.open {
+  background: transparent !important;
+}
+
+.react-tel-input .selected-flag:focus {
+  background: transparent !important;
+  box-shadow: none !important;
 }
