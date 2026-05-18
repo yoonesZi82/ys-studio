@@ -9,11 +9,11 @@ function HeroSection() {
   return (
     <section
       id="home"
-      className="w-full scroll-mt-24 flex justify-between gap-8 flex-col lg:flex-row items-center lg:items-start py-12"
+      className="flex lg:flex-row flex-col justify-between items-center lg:items-start gap-8 py-12 w-full scroll-mt-24"
     >
       <InfoPart />
-      <div className="w-full flex justify-center items-center">
-        <Terminal className="-rotate-2 w-full">
+      <div className="flex justify-center items-center w-full">
+        <Terminal className="w-full min-h-[340px] -rotate-2">
           <TypingAnimation>$ whoami</TypingAnimation>
           <AnimatedSpan>Yoones Zamani - Full Stack Developer</AnimatedSpan>
 
@@ -39,8 +39,8 @@ function HeroSection() {
           <TypingAnimation>$ status --current</TypingAnimation>
           <AnimatedSpan className="flex items-center gap-1.5 mx-0.5">
             <span className="relative flex size-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative inline-flex size-2 rounded-full bg-green-500"></span>
+              <span className="inline-flex absolute bg-green-400 opacity-75 rounded-full w-full h-full animate-ping"></span>
+              <span className="inline-flex relative bg-green-500 rounded-full size-2"></span>
             </span>
             <span className="text-green-500">
               Available for freelance projects
