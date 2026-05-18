@@ -9,6 +9,7 @@ import NextIntelProvider from "@/providers/next-intel-provider";
 import { Toaster } from "sonner";
 import { DirectionProvider } from "@/components/ui/direction";
 import NavbarMenu from "@/components/navbar-menu/NavbarMenu";
+import { Analytics } from "@vercel/analytics/next";
 
 const vazirmatn = Vazirmatn({
   subsets: ["arabic"],
@@ -41,7 +42,7 @@ export default async function RootLayout({
       dir={locale === "fa" ? "rtl" : "ltr"}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col">
+      <body className="flex flex-col min-h-full">
         <DirectionProvider
           dir={locale === "fa" ? "rtl" : "ltr"}
           direction={locale === "fa" ? "rtl" : "ltr"}
@@ -55,12 +56,13 @@ export default async function RootLayout({
             >
               <NextIntelProvider locale={locale}>
                 <NavbarMenu />
-                <main className="mt-12 mb-4 lg:mt-26">{children}</main>
+                <main className="mt-12 lg:mt-26 mb-4">{children}</main>
                 <Toaster />
               </NextIntelProvider>
             </ThemeProvider>
           </QueryProvider>
         </DirectionProvider>
+        <Analytics />
       </body>
     </html>
   );
