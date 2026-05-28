@@ -18,5 +18,17 @@
       "startProject": "Start Project",
       "viewProjects": "View Projects"
     }
+  },
+  "summaryProjects": {
+    "empty": {
+      "badge": "Portfolio",
+      "title": "No projects yet",
+      "description": "New work will show up here soon. In the meantime, let's talk about your next idea.",
+      "cta": "Start a project"
+    },
+    "error": "Failed to load projects.",
+    "viewProject": "View project",
+    "sectionTitle": "My Projects",
+    "moreTags": "Show more tags"
   }
 }

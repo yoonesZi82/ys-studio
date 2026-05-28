@@ -49,48 +49,40 @@ function ContactMe() {
   return (
     <section
       id="contact-me"
-      className="relative overflow-hidden pt-16 pb-10 bg-background scroll-mt-18"
+      className="relative bg-background pt-16 pb-10 overflow-hidden scroll-mt-18"
     >
       {/* Glow */}
-      <div className="pointer-events-none absolute left-1/2 top-0 h-125 w-125 -translate-x-1/2 rounded-full bg-primary/20 blur-[160px]" />
+      <div className="top-0 left-1/2 absolute bg-primary/20 blur-[160px] rounded-full w-125 h-125 -translate-x-1/2 pointer-events-none" />
 
-      <div className="container relative z-10">
+      <div className="z-10 relative container">
         {/* Header */}
         <div className="mx-auto mb-16 max-w-3xl text-center">
-          <h2 className="text-5xl font-bold tracking-tight text-foreground md:text-6xl">
+          <h2 className="font-bold text-foreground text-5xl md:text-6xl tracking-tight">
             Work With{" "}
-            <span className="bg-gradient-to-r from-primary to-primary/40 bg-clip-text text-transparent">
+            <span className="bg-clip-text bg-gradient-to-r from-primary to-primary/40 text-transparent">
               Me
             </span>
           </h2>
 
-          <p className="mt-6 text-lg leading-8 text-muted-foreground">
+          <p className="mt-6 text-muted-foreground text-lg leading-8">
             Looking for a Full-Stack Developer to build scalable web apps,
             modern frontends, or robust backend systems? Let’s build something
             powerful together.
           </p>
         </div>
 
-        <div className="relative mx-auto max-w-5xl rounded-[42px] p-[1.5px] overflow-hidden">
+        <div className="relative mx-auto p-[1.5px] rounded-[42px] max-w-5xl overflow-hidden">
           {/* inner mask */}
-          <div className="relative rounded-[40px] bg-card">
+          <div className="relative bg-card rounded-[40px]">
             <Card
-              className="
-                rounded-[40px]
-                border border-border/50
-                bg-card/95
-                backdrop-blur-xl
-                shadow-2xl
-                p-6 md:p-10
-                relative
-              "
+              className="relative bg-card/95 shadow-2xl backdrop-blur-xl p-6 md:p-10 border border-border/50 rounded-[40px]"
             >
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
                 {/* Inputs */}
-                <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+                <div className="gap-6 grid grid-cols-1 md:grid-cols-3">
                   {/* Name */}
                   <div className="flex flex-col gap-3">
-                    <label className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+                    <label className="text-muted-foreground text-xs uppercase tracking-[0.3em]">
                       Full Name
                     </label>
 
@@ -102,22 +94,13 @@ function ContactMe() {
                         <Input
                           {...field}
                           placeholder="John Doe"
-                          className="
-                            h-16 rounded-2xl
-                            border-border
-                            bg-background/60
-                            px-5
-                            text-lg
-                            focus-visible:border-primary
-                            focus-visible:ring-0
-                            focus-visible:shadow-[0_0_25px_hsl(var(--primary)/0.35)]
-                          "
+                          className="bg-background/60 focus-visible:shadow-[0_0_25px_hsl(var(--primary)/0.35)] px-5 border-border focus-visible:border-primary rounded-2xl focus-visible:ring-0 h-16 text-lg"
                         />
                       )}
                     />
 
                     {errors.fullName && (
-                      <p className="text-sm text-destructive">
+                      <p className="text-destructive text-sm">
                         {errors.fullName.message}
                       </p>
                     )}
@@ -125,7 +108,7 @@ function ContactMe() {
 
                   {/* Email */}
                   <div className="flex flex-col gap-3">
-                    <label className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+                    <label className="text-muted-foreground text-xs uppercase tracking-[0.3em]">
                       Email Address
                     </label>
 
@@ -144,22 +127,13 @@ function ContactMe() {
                           {...field}
                           type="email"
                           placeholder="email@example.com"
-                          className="
-                            h-16 rounded-2xl
-                            border-border
-                            bg-background/60
-                            px-5
-                            text-lg
-                            focus-visible:border-primary
-                            focus-visible:ring-0
-                            focus-visible:shadow-[0_0_25px_hsl(var(--primary)/0.35)]
-                          "
+                          className="bg-background/60 focus-visible:shadow-[0_0_25px_hsl(var(--primary)/0.35)] px-5 border-border focus-visible:border-primary rounded-2xl focus-visible:ring-0 h-16 text-lg"
                         />
                       )}
                     />
 
                     {errors.email && (
-                      <p className="text-sm text-destructive">
+                      <p className="text-destructive text-sm">
                         {errors.email.message}
                       </p>
                     )}
@@ -167,7 +141,7 @@ function ContactMe() {
 
                   {/* Phone */}
                   <div className="flex flex-col gap-3">
-                    <label className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+                    <label className="text-muted-foreground text-xs uppercase tracking-[0.3em]">
                       Phone Number
                     </label>
 
@@ -176,21 +150,24 @@ function ContactMe() {
                       control={control}
                       rules={{ required: "Phone number is required" }}
                       render={({ field }) => (
-                        <PhoneInput
-                          country={"us"}
-                          value={field.value}
-                          onChange={(phone) => field.onChange(phone)}
-                          enableSearch
-                          containerClass="w-full"
-                          inputClass="!w-full !h-16 !rounded-2xl !border !border-border !bg-background/60 !text-foreground !text-lg !pl-16 !pr-5"
-                          buttonClass="!bg-transparent !border-border"
-                          dropdownClass="!bg-popover !text-popover-foreground !border-border"
-                        />
+                        <div className="phone-input-container">
+                          <PhoneInput
+                            country={"us"}
+                            value={field.value}
+                            onChange={(phone) => field.onChange(phone)}
+                            enableSearch
+                            containerClass="w-full"
+                            inputClass="!w-full !h-16 !rounded-2xl !border !border-border !bg-background/60 !text-foreground !text-lg !pl-16 !pr-5"
+                            buttonClass="!bg-transparent !border-border !rounded-l-2xl"
+                            dropdownClass="!bg-popover !text-popover-foreground !border-border"
+                            searchClass="!bg-popover !text-popover-foreground !border-border"
+                          />
+                        </div>
                       )}
                     />
 
                     {errors.phone && (
-                      <p className="text-sm text-destructive">
+                      <p className="text-destructive text-sm">
                         {errors.phone.message}
                       </p>
                     )}
@@ -199,7 +176,7 @@ function ContactMe() {
 
                 {/* Message */}
                 <div className="flex flex-col gap-3">
-                  <label className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+                  <label className="text-muted-foreground text-xs uppercase tracking-[0.3em]">
                     Project Details
                   </label>
 
@@ -218,24 +195,13 @@ function ContactMe() {
                         {...field}
                         rows={7}
                         placeholder="Describe your project..."
-                        className="
-                          min-h-32
-                          resize-none
-                          rounded-3xl
-                          border-border
-                          bg-background/60
-                          px-5 py-5
-                          text-lg
-                          focus-visible:border-primary
-                          focus-visible:ring-0
-                          focus-visible:shadow-[0_0_25px_hsl(var(--primary)/0.35)]
-                        "
+                        className="bg-background/60 focus-visible:shadow-[0_0_25px_hsl(var(--primary)/0.35)] px-5 py-5 border-border focus-visible:border-primary rounded-3xl focus-visible:ring-0 min-h-32 text-lg resize-none"
                       />
                     )}
                   />
 
                   {errors.message && (
-                    <p className="text-sm text-destructive">
+                    <p className="text-destructive text-sm">
                       {errors.message.message}
                     </p>
                   )}
@@ -245,15 +211,7 @@ function ContactMe() {
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="
-                    h-16 w-full rounded-2xl
-                    bg-primary
-                    text-primary-foreground
-                    text-lg font-semibold
-                    transition-all duration-300
-                    hover:scale-[1.01]
-                    hover:shadow-[0_0_45px_hsl(var(--primary)/0.5)]
-                  "
+                  className="bg-primary hover:shadow-[0_0_45px_hsl(var(--primary)/0.5)] rounded-2xl w-full h-16 font-semibold text-primary-foreground text-lg hover:scale-[1.01] transition-all duration-300"
                 >
                   <span className="flex items-center gap-3 uppercase tracking-wide">
                     <Send size={20} />
@@ -263,14 +221,14 @@ function ContactMe() {
                 </Button>
 
                 {/* Divider */}
-                <div className="h-px w-full bg-gradient-to-r from-transparent via-border to-transparent" />
+                <div className="bg-gradient-to-r from-transparent to-transparent via-border w-full h-px" />
 
                 {/* Socials */}
-                <div className="flex flex-wrap items-center justify-center gap-8 pt-2">
+                <div className="flex flex-wrap justify-center items-center gap-8 pt-2">
                   <Link
                     href="https://github.com"
                     target="_blank"
-                    className="flex items-center gap-2 text-lg text-muted-foreground transition hover:text-primary"
+                    className="flex items-center gap-2 text-muted-foreground hover:text-primary text-lg transition"
                   >
                     <Send size={20} />
                     GitHub
@@ -279,13 +237,13 @@ function ContactMe() {
                   <Link
                     href="https://linkedin.com"
                     target="_blank"
-                    className="flex items-center gap-2 text-lg text-muted-foreground transition hover:text-primary"
+                    className="flex items-center gap-2 text-muted-foreground hover:text-primary text-lg transition"
                   >
                     <Send size={20} />
                     LinkedIn
                   </Link>
 
-                  <span className="flex items-center gap-2 text-lg text-muted-foreground">
+                  <span className="flex items-center gap-2 text-muted-foreground text-lg">
                     <Phone size={20} />
                     Available for freelance work
                   </span>
