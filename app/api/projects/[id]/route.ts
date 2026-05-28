@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 
 import { prisma } from "@/lib/prisma";
 
+export const dynamic = "force-dynamic";
+
 type RouteContext = {
   params: Promise<{ id: string }>;
 };
@@ -19,7 +21,8 @@ export async function GET(_request: Request, context: RouteContext) {
     }
 
     return NextResponse.json(project);
-  } catch {
+  } catch (error) {
+    console.error("[GET /api/projects/[id]]", error);
     return NextResponse.json(
       { error: "Failed to fetch project" },
       { status: 500 },
@@ -44,7 +47,8 @@ export async function DELETE(_request: Request, context: RouteContext) {
     });
 
     return NextResponse.json({ success: true });
-  } catch {
+  } catch (error) {
+    console.error("[DELETE /api/projects/[id]]", error);
     return NextResponse.json(
       { error: "Failed to delete project" },
       { status: 500 },

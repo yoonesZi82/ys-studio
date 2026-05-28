@@ -4,7 +4,14 @@ import { parseCreateProjectForm } from "@/lib/api/projects";
 import { uploadProjectImage } from "@/lib/cloudinary";
 import { prisma } from "@/lib/prisma";
 
+export const dynamic = "force-dynamic";
+
 export type { Project, CreateProjectInput } from "@/lib/types/project";
+
+function logRouteError(route: string, error: unknown) {
+  const message = error instanceof Error ? error.message : String(error);
+  console.error(`[${route}]`, message, error);
+}
 
 function parsePositiveInt(value: string | null, fallback: number) {
   const parsed = Number.parseInt(value ?? "", 10);
@@ -37,7 +44,19 @@ export async function GET(request: Request) {
       nextPage: hasMore ? page + 1 : undefined,
       total,
     });
-  } catch {
+  } catch (error) {
+    logRouteError("GET /api/projects", error);
+
+    if (
+      error instanceof Error &&
+      error.message.includes("DATABASE_URL is not set")
+    ) {
+      return NextResponse.json(
+        { error: "Database is not configured on the server" },
+        { status: 503 },
+      );
+    }
+
     return NextResponse.json(
       { error: "Failed to fetch projects" },
       { status: 500 },
@@ -68,6 +87,8 @@ export async function POST(request: Request) {
 
     return NextResponse.json(project, { status: 201 });
   } catch (error) {
+    logRouteError("POST /api/projects", error);
+
     const message =
       error instanceof Error ? error.message : "Failed to create project";
 
