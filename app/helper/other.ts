@@ -1,4 +1,7 @@
 const PROJECT_IMAGE_FALLBACK = "/fallback.jpg";
+/** Profile photo in /public — commit the file so Vercel can serve it. */
+const ABOUT_PROFILE_IMAGE = "/me.jpg";
+const ABOUT_IMAGE_FALLBACK = "/fallback.jpg";
 
 function normalizeProjectImageSrc(image: string | null | undefined): string {
   if (!image?.trim()) {
@@ -91,6 +94,8 @@ function normalizeProjectTags(tags: unknown): string[] {
 export {
   normalizeProjectImageSrc,
   PROJECT_IMAGE_FALLBACK,
+  ABOUT_PROFILE_IMAGE,
+  ABOUT_IMAGE_FALLBACK,
   parseProjectLink,
   hasProjectLink,
   isExternalProjectLink,

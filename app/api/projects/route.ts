@@ -5,6 +5,7 @@ import { uploadProjectImage } from "@/app/configs/cloudinary/cloudinary";
 import { prisma } from "@/app/helper/prisma/prisma";
 
 export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 
 export type { Project, CreateProjectInput } from "@/app/types/projects.type";
 
@@ -44,14 +45,26 @@ export async function GET(request: Request) {
   } catch (error) {
     logRouteError("GET /api/projects", error);
 
-    if (
-      error instanceof Error &&
-      error.message.includes("DATABASE_URL is not set")
-    ) {
-      return NextResponse.json(
-        { error: "Database is not configured on the server" },
-        { status: 503 },
-      );
+    if (error instanceof Error) {
+      if (error.message.includes("DATABASE_URL is not set")) {
+        return NextResponse.json(
+          { error: "Database is not configured on the server" },
+          { status: 503 },
+        );
+      }
+
+      if (
+        error.message.includes("query_engine") ||
+        error.message.includes("libquery_engine")
+      ) {
+        return NextResponse.json(
+          {
+            error:
+              "Database client failed to start (Prisma engine). Redeploy after setting DATABASE_URL on Vercel.",
+          },
+          { status: 503 },
+        );
+      }
     }
 
     return NextResponse.json(

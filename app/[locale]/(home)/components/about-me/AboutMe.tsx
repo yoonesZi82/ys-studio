@@ -1,8 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
+import {
+  ABOUT_IMAGE_FALLBACK,
+  ABOUT_PROFILE_IMAGE,
+} from "@/app/helper/other";
 import { cn } from "@/lib/utils";
 
 const skills = [
@@ -29,6 +34,7 @@ function AboutMe() {
   const t = useTranslations("about");
   const locale = useLocale();
   const isRtl = locale === "fa";
+  const [profileSrc, setProfileSrc] = useState(ABOUT_PROFILE_IMAGE);
 
   return (
     <section
@@ -36,12 +42,17 @@ function AboutMe() {
       className="flex lg:flex-row flex-col gap-3 lg:gap-20 w-full scroll-mt-24"
     >
       <Image
-        src="/me.jpg"
+        src={profileSrc}
         alt={t("imageAlt")}
         width={500}
         height={500}
         className="flex-[0.6] shadow-sm border border-border rounded-xl object-cover"
         loading="eager"
+        onError={() => {
+          if (profileSrc !== ABOUT_IMAGE_FALLBACK) {
+            setProfileSrc(ABOUT_IMAGE_FALLBACK);
+          }
+        }}
       />
 
       <div className="flex flex-col flex-1 justify-center gap-4 w-full">

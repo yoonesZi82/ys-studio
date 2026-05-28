@@ -34,6 +34,10 @@ const config: runtime.GetPrismaClientConfig = {
         "fromEnvVar": null,
         "value": "windows",
         "native": true
+      },
+      {
+        "fromEnvVar": null,
+        "value": "debian-openssl-3.0.x"
       }
     ],
     "previewFeatures": [],
@@ -56,8 +60,8 @@ const config: runtime.GetPrismaClientConfig = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client\"\n  output   = \"../app/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"mongodb\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Project {\n  id          String   @id @default(auto()) @map(\"_id\") @db.ObjectId\n  title       String\n  description String\n  image       String\n  link        String?\n  tags        String[]\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n\n  @@map(\"projects\")\n}\n\nmodel ContactMessage {\n  id        String   @id @default(auto()) @map(\"_id\") @db.ObjectId\n  fullName  String\n  email     String\n  phone     String\n  message   String\n  locale    String?\n  read      Boolean  @default(false)\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@index([createdAt(sort: Desc)])\n  @@index([read])\n  @@map(\"contact_messages\")\n}\n",
-  "inlineSchemaHash": "0b2be1e96ccd23bfa316377fa9b6128e6118819b6f37d47c47ae003b74ecf32e",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider      = \"prisma-client\"\n  output        = \"../app/generated/prisma\"\n  // Vercel runs Linux — include its OpenSSL target alongside the local dev engine.\n  binaryTargets = [\"native\", \"debian-openssl-3.0.x\"]\n}\n\ndatasource db {\n  provider = \"mongodb\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Project {\n  id          String   @id @default(auto()) @map(\"_id\") @db.ObjectId\n  title       String\n  description String\n  image       String\n  link        String?\n  tags        String[]\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n\n  @@map(\"projects\")\n}\n\nmodel ContactMessage {\n  id        String   @id @default(auto()) @map(\"_id\") @db.ObjectId\n  fullName  String\n  email     String\n  phone     String\n  message   String\n  locale    String?\n  read      Boolean  @default(false)\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@index([createdAt(sort: Desc)])\n  @@index([read])\n  @@map(\"contact_messages\")\n}\n",
+  "inlineSchemaHash": "329d808162dc492e5e12a175aab44e016838d6602108a7f6608bd46b1dab5bde",
   "copyEngine": true,
   "runtimeDataModel": {
     "models": {},
