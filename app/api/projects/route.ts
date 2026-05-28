@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 
+import { databaseApiErrorResponse } from "@/app/helper/database/database-api-error";
 import { parseCreateProjectForm } from "@/app/helper/projects/projects";
 import { uploadProjectImage } from "@/app/configs/cloudinary/cloudinary";
 import { prisma } from "@/app/helper/prisma/prisma";
@@ -45,27 +46,8 @@ export async function GET(request: Request) {
   } catch (error) {
     logRouteError("GET /api/projects", error);
 
-    if (error instanceof Error) {
-      if (error.message.includes("DATABASE_URL is not set")) {
-        return NextResponse.json(
-          { error: "Database is not configured on the server" },
-          { status: 503 },
-        );
-      }
-
-      if (
-        error.message.includes("query_engine") ||
-        error.message.includes("libquery_engine")
-      ) {
-        return NextResponse.json(
-          {
-            error:
-              "Database client failed to start (Prisma engine). Redeploy after setting DATABASE_URL on Vercel.",
-          },
-          { status: 503 },
-        );
-      }
-    }
+    const dbError = databaseApiErrorResponse(error);
+    if (dbError) return dbError;
 
     return NextResponse.json(
       { error: "Failed to fetch projects" },

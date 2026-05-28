@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 
+import { databaseApiErrorResponse } from "@/app/helper/database/database-api-error";
 import {
   parseCreateContactMessageBody,
   parseReadFilter,
@@ -7,6 +8,7 @@ import {
 import { prisma } from "@/app/helper/prisma/prisma";
 
 export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 
 export type {
   ContactMessage,
@@ -22,20 +24,6 @@ function logRouteError(route: string, error: unknown) {
 function parsePositiveInt(value: string | null, fallback: number) {
   const parsed = Number.parseInt(value ?? "", 10);
   return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
-}
-
-function databaseConfigResponse(error: unknown) {
-  if (
-    error instanceof Error &&
-    error.message.includes("DATABASE_URL is not set")
-  ) {
-    return NextResponse.json(
-      { error: "Database is not configured on the server" },
-      { status: 503 },
-    );
-  }
-
-  return null;
 }
 
 export async function GET(request: Request) {
@@ -68,7 +56,7 @@ export async function GET(request: Request) {
   } catch (error) {
     logRouteError("GET /api/contact-me", error);
 
-    const dbError = databaseConfigResponse(error);
+    const dbError = databaseApiErrorResponse(error);
     if (dbError) return dbError;
 
     return NextResponse.json(
@@ -102,7 +90,7 @@ export async function POST(request: Request) {
   } catch (error) {
     logRouteError("POST /api/contact-me", error);
 
-    const dbError = databaseConfigResponse(error);
+    const dbError = databaseApiErrorResponse(error);
     if (dbError) return dbError;
 
     return NextResponse.json(
