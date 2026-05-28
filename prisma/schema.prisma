@@ -2,9 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider      = "prisma-client"
-  output        = "../app/generated/prisma"
-  // Vercel/AWS Lambda uses RHEL + OpenSSL 3.x (not debian). Keep native for local dev.
+  provider      = "prisma-client-js"
+  // Default output (node_modules/.prisma/client) bundles reliably on Vercel.
   binaryTargets = ["native", "rhel-openssl-3.0.x"]
 }
 

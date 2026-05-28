@@ -3,12 +3,14 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
-  // Next.js 16 file tracing can drop Prisma's .so.node engine on Vercel (→ 503 from API routes).
+  // Next.js 16 can omit Prisma query engines from serverless bundles without this.
   outputFileTracingIncludes: {
-    "/api/**/*": ["./app/generated/prisma/**/*"],
-    "/*": ["./app/generated/prisma/**/*"],
+    "/api/**/*": [
+      "./node_modules/.prisma/client/**/*",
+      "./node_modules/@prisma/engines/**/*",
+    ],
+    "/*": ["./node_modules/.prisma/client/**/*"],
   },
-  serverExternalPackages: ["@prisma/client", "prisma"],
   images: {
     remotePatterns: [
       {
