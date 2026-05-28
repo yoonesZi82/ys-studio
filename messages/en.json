@@ -1,4 +1,15 @@
 {
+  "siteExperience": {
+    "loading": {
+      "title": "Preparing your experience",
+      "subtitle": "Loading assets and setting things up…"
+    },
+    "offline": {
+      "title": "No internet connection",
+      "description": "You're offline. Some parts of the site won't work until you're connected again.",
+      "hint": "We'll restore access automatically when you're back online."
+    }
+  },
   "navbar": {
     "home": "Home",
     "about": "About",
@@ -27,6 +38,23 @@
       "cta": "Start a project"
     },
     "error": "Failed to load projects.",
+    "errorState": {
+      "badge": "Connection issue",
+      "offline": {
+        "title": "You're offline",
+        "description": "Projects couldn't load without a network connection. Check your connection and try again."
+      },
+      "server": {
+        "title": "Projects unavailable",
+        "description": "The server couldn't return your projects right now. This is usually temporary — try again in a moment."
+      },
+      "unknown": {
+        "title": "Something went wrong",
+        "description": "We couldn't load projects. Please try again."
+      },
+      "retry": "Try again",
+      "retrying": "Retrying…"
+    },
     "viewProject": "View project",
     "sectionTitle": "My Projects",
     "moreTags": "Show more tags"

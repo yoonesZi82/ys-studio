@@ -3,15 +3,21 @@ import { defineConfig } from "prisma/config";
 
 // `prisma generate` only needs a valid URL shape, not a live connection.
 // On Vercel, set DATABASE_URL in Project → Settings → Environment Variables.
-const databaseUrl =
-  process.env.DATABASE_URL ??
-  "postgresql://build:build@localhost:5432/build";
+import { resolveMongoDatabaseUrl } from "./lib/database-url";
+
+const databaseUrl = (() => {
+  try {
+    return resolveMongoDatabaseUrl(
+      process.env.DATABASE_URL ??
+        "mongodb://build:build@localhost:27017/build",
+    );
+  } catch {
+    return "mongodb://build:build@localhost:27017/build";
+  }
+})();
 
 export default defineConfig({
   schema: "prisma/schema.prisma",
-  migrations: {
-    path: "prisma/migrations",
-  },
   datasource: {
     url: databaseUrl,
   },

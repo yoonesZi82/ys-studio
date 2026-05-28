@@ -9,10 +9,13 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
   ArrowUpRight,
+  CloudOff,
   FolderKanban,
   Loader2,
   MoreHorizontal,
+  RefreshCw,
   Sparkles,
+  WifiOff,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useInView } from "react-intersection-observer";
@@ -52,7 +55,9 @@ import {
 } from "@/components/ui/tooltip";
 import {
   fetchProjectsPage,
+  isProjectsFetchError,
   SUMMARY_PROJECTS_PAGE_SIZE,
+  type ProjectsFetchErrorKind,
 } from "@/lib/api/projects-client";
 import { hasProjectLink, isExternalProjectLink } from "@/lib/project-link";
 import {
@@ -78,7 +83,21 @@ const MASONRY_COLUMNS = {
   1280: 4,
 } as const;
 
+/** Matches MASONRY_COLUMNS — stable markup for SSR / first paint. */
+const masonryFallbackClass =
+  "grid w-full gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4";
+
 function ProjectsMasonry({ children }: { children: React.ReactNode }) {
+  const [isMasonryReady, setIsMasonryReady] = useState(false);
+
+  useEffect(() => {
+    setIsMasonryReady(true);
+  }, []);
+
+  if (!isMasonryReady) {
+    return <div className={masonryFallbackClass}>{children}</div>;
+  }
+
   return (
     <ResponsiveMasonry
       columnsCountBreakPoints={MASONRY_COLUMNS}
@@ -360,6 +379,139 @@ function ProjectCardContent({
   );
 }
 
+function resolveProjectsErrorKind(
+  error: unknown,
+  isOnline: boolean,
+): ProjectsFetchErrorKind {
+  if (!isOnline) {
+    return "offline";
+  }
+
+  if (isProjectsFetchError(error)) {
+    return error.kind;
+  }
+
+  return "unknown";
+}
+
+function ProjectsErrorState({
+  errorKind,
+  onRetry,
+  isRetrying,
+}: {
+  errorKind: ProjectsFetchErrorKind;
+  onRetry: () => void;
+  isRetrying: boolean;
+}) {
+  const t = useTranslations("summaryProjects.errorState");
+  const reduceMotion = useReducedMotion();
+  const isOffline = errorKind === "offline";
+
+  const Icon = isOffline ? WifiOff : CloudOff;
+  const copyKey = errorKind === "server" ? "server" : isOffline ? "offline" : "unknown";
+
+  return (
+    <motion.div
+      initial={reduceMotion ? false : "hidden"}
+      whileInView={reduceMotion ? undefined : "visible"}
+      viewport={viewportReveal}
+      variants={emptyStateVariants}
+    >
+      <Empty className="isolate relative bg-linear-to-b from-destructive/8 via-background to-background px-6 py-14 md:py-16 border border-destructive/30 border-dashed rounded-2xl min-h-80 md:min-h-88 overflow-hidden">
+        <div
+          className="absolute inset-0 opacity-[0.28] pointer-events-none"
+          aria-hidden
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 1px 1px, color-mix(in oklab, var(--destructive) 22%, transparent) 1px, transparent 0)",
+            backgroundSize: "24px 24px",
+          }}
+        />
+        <div
+          className="-top-20 left-1/2 absolute bg-destructive/15 blur-3xl rounded-full size-56 -translate-x-1/2 pointer-events-none"
+          aria-hidden
+        />
+
+        {!reduceMotion && (
+          <motion.div
+            className="top-8 right-10 absolute opacity-20 pointer-events-none"
+            aria-hidden
+            animate={{ y: [0, -8, 0], opacity: [0.15, 0.28, 0.15] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <CloudOff className="size-16 text-destructive" />
+          </motion.div>
+        )}
+
+        <EmptyHeader className="z-10 relative gap-3">
+          <motion.div variants={emptyChildVariants}>
+            <Badge
+              variant="outline"
+              className="bg-destructive/10 px-3 py-1 border-destructive/35 font-medium text-[10px] text-destructive uppercase tracking-[0.2em]"
+            >
+              {t("badge")}
+            </Badge>
+          </motion.div>
+
+          <motion.div variants={emptyChildVariants}>
+            <EmptyMedia
+              variant="icon"
+              className="relative bg-destructive/10 shadow-lg shadow-destructive/10 mb-1 border border-destructive/25 rounded-2xl size-16 [&_svg]:size-7 text-destructive overflow-visible"
+            >
+              <Icon className="relative z-10" />
+              {!reduceMotion && (
+                <motion.span
+                  className="absolute inset-0 rounded-2xl ring-2 ring-destructive/30"
+                  animate={{ scale: [1, 1.12, 1], opacity: [0.5, 0, 0.5] }}
+                  transition={{
+                    duration: 2.2,
+                    repeat: Infinity,
+                    ease: "easeOut",
+                  }}
+                  aria-hidden
+                />
+              )}
+            </EmptyMedia>
+          </motion.div>
+
+          <motion.div variants={emptyChildVariants}>
+            <EmptyTitle className="font-semibold text-2xl md:text-3xl tracking-tight">
+              {t(`${copyKey}.title`)}
+            </EmptyTitle>
+          </motion.div>
+
+          <motion.div variants={emptyChildVariants}>
+            <EmptyDescription className="max-w-md text-muted-foreground text-base">
+              {t(`${copyKey}.description`)}
+            </EmptyDescription>
+          </motion.div>
+        </EmptyHeader>
+
+        <EmptyContent className="z-10 relative pt-2">
+          <motion.div variants={emptyChildVariants}>
+            <Button
+              size="lg"
+              variant="outline"
+              className="group px-8 border-destructive/30 hover:bg-destructive/10 hover:border-destructive/45"
+              onClick={onRetry}
+              disabled={isRetrying}
+            >
+              <RefreshCw
+                className={cn(
+                  "size-4",
+                  isRetrying && "animate-spin",
+                  !isRetrying && "group-hover:rotate-180 transition-transform duration-500",
+                )}
+              />
+              {isRetrying ? t("retrying") : t("retry")}
+            </Button>
+          </motion.div>
+        </EmptyContent>
+      </Empty>
+    </motion.div>
+  );
+}
+
 function ProjectsEmptyState() {
   const t = useTranslations("summaryProjects.empty");
   const reduceMotion = useReducedMotion();
@@ -539,11 +691,15 @@ export default function SummaryProjects() {
   const t = useTranslations("summaryProjects");
   const reduceMotion = useReducedMotion();
   const { ref: loadMoreRef, inView } = useInView({ threshold: 0.2 });
+  const [isOnline, setIsOnline] = useState(true);
 
   const {
     data,
     isLoading,
     isError,
+    error,
+    refetch,
+    isRefetching,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
@@ -553,15 +709,46 @@ export default function SummaryProjects() {
     initialPageParam: 1,
     getNextPageParam: (lastPage) => lastPage.nextPage,
     staleTime: 1000 * 60 * 5,
-    retry: 1,
+    retry: (failureCount, err) => {
+      if (isProjectsFetchError(err) && err.kind === "offline") {
+        return false;
+      }
+      return failureCount < 1;
+    },
     refetchOnWindowFocus: false,
   });
 
   useEffect(() => {
-    if (inView && hasNextPage && !isFetchingNextPage) {
+    const syncOnline = () => setIsOnline(navigator.onLine);
+
+    syncOnline();
+    window.addEventListener("online", syncOnline);
+    window.addEventListener("offline", syncOnline);
+
+    return () => {
+      window.removeEventListener("online", syncOnline);
+      window.removeEventListener("offline", syncOnline);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleOnline = () => {
+      if (isError) {
+        void refetch();
+      }
+    };
+
+    window.addEventListener("online", handleOnline);
+    return () => window.removeEventListener("online", handleOnline);
+  }, [isError, refetch]);
+
+  useEffect(() => {
+    if (inView && hasNextPage && !isFetchingNextPage && !isError) {
       void fetchNextPage();
     }
-  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
+  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage, isError]);
+
+  const errorKind = resolveProjectsErrorKind(error, isOnline);
 
   const projects = useMemo(
     () => data?.pages.flatMap((page) => page.data) ?? [],
@@ -613,15 +800,17 @@ export default function SummaryProjects() {
 
         <AnimatePresence mode="wait">
           {isError ? (
-            <motion.p
+            <motion.div
               key="error"
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              className="text-destructive text-sm text-center"
+              exit={{ opacity: 0, scale: 0.98 }}
+              className="w-full"
             >
-              {t("error")}
-            </motion.p>
+              <ProjectsErrorState
+                errorKind={errorKind}
+                onRetry={() => void refetch()}
+                isRetrying={isRefetching}
+              />
+            </motion.div>
           ) : isEmpty ? (
             <motion.div key="empty" exit={{ opacity: 0, scale: 0.98 }}>
               <ProjectsEmptyState />

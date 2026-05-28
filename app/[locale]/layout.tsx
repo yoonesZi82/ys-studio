@@ -9,6 +9,7 @@ import NextIntelProvider from "@/providers/next-intel-provider";
 import { Toaster } from "sonner";
 import { DirectionProvider } from "@/components/ui/direction";
 import NavbarMenu from "@/components/navbar-menu/NavbarMenu";
+import SiteExperience from "@/components/site-experience/SiteExperience";
 import { Analytics } from "@vercel/analytics/next";
 
 const vazirmatn = Vazirmatn({
@@ -55,9 +56,11 @@ export default async function RootLayout({
               disableTransitionOnChange
             >
               <NextIntelProvider locale={locale}>
-                <NavbarMenu />
-                <main className="mt-12 lg:mt-26 mb-4">{children}</main>
-                <Toaster />
+                <SiteExperience>
+                  <NavbarMenu />
+                  <main className="mt-12 lg:mt-26 mb-4">{children}</main>
+                  <Toaster />
+                </SiteExperience>
               </NextIntelProvider>
             </ThemeProvider>
           </QueryProvider>

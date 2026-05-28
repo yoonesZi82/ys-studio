@@ -407,7 +407,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
   }
   meta: {
     modelProps: "project"
-    txIsolationLevel: TransactionIsolationLevel
+    txIsolationLevel: never
   }
   model: {
     Project: {
@@ -442,10 +442,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
           args: Prisma.ProjectCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
-        createManyAndReturn: {
-          args: Prisma.ProjectCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectPayload>[]
-        }
         delete: {
           args: Prisma.ProjectDeleteArgs<ExtArgs>
           result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectPayload>
@@ -462,10 +458,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
           args: Prisma.ProjectUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
-        updateManyAndReturn: {
-          args: Prisma.ProjectUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectPayload>[]
-        }
         upsert: {
           args: Prisma.ProjectUpsertArgs<ExtArgs>
           result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectPayload>
@@ -478,6 +470,14 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
           args: Prisma.ProjectGroupByArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ProjectGroupByOutputType>[]
         }
+        findRaw: {
+          args: Prisma.ProjectFindRawArgs<ExtArgs>
+          result: Prisma.JsonObject
+        }
+        aggregateRaw: {
+          args: Prisma.ProjectAggregateRawArgs<ExtArgs>
+          result: Prisma.JsonObject
+        }
         count: {
           args: Prisma.ProjectCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ProjectCountAggregateOutputType> | number
@@ -489,21 +489,9 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
   other: {
     payload: any
     operations: {
-      $executeRaw: {
-        args: [query: TemplateStringsArray | Sql, ...values: any[]],
-        result: any
-      }
-      $executeRawUnsafe: {
-        args: [query: string, ...values: any[]],
-        result: any
-      }
-      $queryRaw: {
-        args: [query: TemplateStringsArray | Sql, ...values: any[]],
-        result: any
-      }
-      $queryRawUnsafe: {
-        args: [query: string, ...values: any[]],
-        result: any
+      $runCommandRaw: {
+        args: Prisma.InputJsonObject,
+        result: JsonObject
       }
     }
   }
@@ -512,16 +500,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
 /**
  * Enums
  */
-
-export const TransactionIsolationLevel = runtime.makeStrictEnum({
-  ReadUncommitted: 'ReadUncommitted',
-  ReadCommitted: 'ReadCommitted',
-  RepeatableRead: 'RepeatableRead',
-  Serializable: 'Serializable'
-} as const)
-
-export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
-
 
 export const ProjectScalarFieldEnum = {
   id: 'id',
@@ -551,14 +529,6 @@ export const QueryMode = {
 } as const
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
-
-
-export const NullsOrder = {
-  first: 'first',
-  last: 'last'
-} as const
-
-export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
 
@@ -672,7 +642,6 @@ export interface PrismaClientOptions {
   transactionOptions?: {
     maxWait?: number
     timeout?: number
-    isolationLevel?: TransactionIsolationLevel
   }
   /**
    * Instance of a Driver Adapter, e.g., like one provided by `@prisma/adapter-planetscale`
