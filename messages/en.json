@@ -1,4 +1,13 @@
 {
+  "metadata": {
+    "siteName": "Yoones Zamani",
+    "title": "Yoones Zamani — Full Stack Developer | React, Next.js & Node.js",
+    "titleTemplate": "%s | Yoones Zamani",
+    "description": "Portfolio of Yoones Zamani, a Full Stack Developer building scalable web apps, modern frontends, and robust backend systems with React, Next.js, TypeScript, and Node.js. Available for freelance projects.",
+    "ogTitle": "Yoones Zamani — Full Stack Web Developer",
+    "ogDescription": "Building end-to-end web solutions that scale — from pixel-perfect UIs to production-ready backends.",
+    "ogImageAlt": "Yoones Zamani — Full Stack Developer"
+  },
   "siteExperience": {
     "loading": {
       "title": "Preparing your experience",
