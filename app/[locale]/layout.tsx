@@ -40,6 +40,7 @@ export default async function RootLayout({
         vazirmatn.variable,
         locale === "fa" ? "font-vazir" : "font-sans",
       )}
+      lang={locale}
       dir={locale === "fa" ? "rtl" : "ltr"}
       suppressHydrationWarning
     >

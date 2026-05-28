@@ -49,3 +49,8 @@ path.join(process.cwd(), "app/generated/prisma/query_engine-windows.dll.node")
  * 
  */
 export type Project = Prisma.ProjectModel
+/**
+ * Model ContactMessage
+ * 
+ */
+export type ContactMessage = Prisma.ContactMessageModel

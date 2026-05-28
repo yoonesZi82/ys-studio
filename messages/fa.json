@@ -2,7 +2,7 @@
   "siteExperience": {
     "loading": {
       "title": "در حال آماده‌سازی",
-      "subtitle": "دارایی‌ها بارگذاری می‌شوند…"
+      "subtitle": "داده ها بارگذاری می‌شوند…"
     },
     "offline": {
       "title": "اتصال اینترنت قطع است",
@@ -20,14 +20,73 @@
     "badge": "توسعه‌دهنده فول‌استک - آماده تولید",
     "heading": {
       "line1": "ساخت",
-      "line1Highlight": "راهکارهای کامل",
-      "line2": "وب",
+      "line1Highlight": "راهکارهای وب",
+      "line2": "کامل و",
       "line3": "قابل مقیاس‌پذیری"
     },
     "description": "از رابط‌های کاربری دقیق تا معماری‌های بک‌اند قدرتمند. من تجربیات دیجیتال کامل با استک‌های مدرن و بهترین شیوه‌ها می‌سازم.",
     "buttons": {
       "startProject": "شروع پروژه",
       "viewProjects": "مشاهده نمونه کارها"
+    },
+    "terminal": {
+      "whoamiCmd": "$ whoami",
+      "whoamiOutput": "یونس زمانی - توسعه‌دهنده فول‌استک",
+      "skillsCmd": "$ cat skills.txt",
+      "frontend": "✔ فرانت‌اند: React, Next.js, TypeScript, Tailwind",
+      "backend": "✔ بک‌اند: Node.js, Express, NestJS, Python",
+      "database": "✔ دیتابیس: PostgreSQL, MongoDB, Redis, Prisma",
+      "devops": "✔ DevOps: Docker, Git, CI/CD, Linux",
+      "passionCmd": "$ echo $PASSION",
+      "passion": "تبدیل ایده‌ها به راهکارهای فول‌استک آماده تولید",
+      "statusCmd": "$ status --current",
+      "statusAvailable": "آماده همکاری فریلنس"
+    }
+  },
+  "about": {
+    "imageAlt": "یونس زمانی",
+    "title": "یونس زمانی",
+    "titleHighlight": "توسعه‌دهنده فول‌استک",
+    "description": "اپلیکیشن‌های فول‌استک را با نگاه هم مهندس و هم طراح محصول می‌سازم؛ بک‌اندهای مقیاس‌پذیر، APIهای روان و رابط‌های واکنش‌گرا که استفاده از آن‌ها ساده به نظر می‌رسد. رویکرد من معماری سیستم قوی را با تجربه کاربری تمیز و شهودی پیوند می‌دهد و چالش‌های فنی پیچیده را به محصولاتی تبدیل می‌کند که کاربران واقعاً از کار با آن‌ها لذت می‌برند."
+  },
+  "contact": {
+    "heading": {
+      "line1": "همکاری",
+      "line1Highlight": "با من"
+    },
+    "description": "به دنبال توسعه‌دهنده فول‌استک برای ساخت وب‌اپ مقیاس‌پذیر، فرانت‌اند مدرن یا بک‌اند قدرتمند هستید؟ بیایید با هم چیزی قدرتمند بسازیم.",
+    "form": {
+      "fullName": "نام و نام خانوادگی",
+      "fullNamePlaceholder": "نام شما",
+      "email": "ایمیل",
+      "emailPlaceholder": "email@example.com",
+      "phone": "شماره تماس",
+      "phoneSearchPlaceholder": "جستجوی کشور",
+      "phoneSearchNotFound": "کشوری یافت نشد",
+      "message": "جزئیات پروژه",
+      "messagePlaceholder": "پروژه خود را توضیح دهید...",
+      "submit": "ارسال درخواست پروژه",
+      "submitting": "در حال ارسال...",
+      "loadingTitle": "در حال ارسال پیام",
+      "loadingSubtitle": "چند لحظه صبر کنید…",
+      "alertErrorTitle": "ارسال پیام انجام نشد",
+      "alertSuccessTitle": "پیام ارسال شد",
+      "alertDismiss": "بستن",
+      "submitSuccess": "پیام شما با موفقیت ارسال شد. به‌زودی با شما تماس می‌گیرم.",
+      "submitError": "مشکلی پیش آمد. لطفاً دوباره تلاش کنید.",
+      "errors": {
+        "fullNameRequired": "نام الزامی است",
+        "emailRequired": "ایمیل الزامی است",
+        "emailInvalid": "ایمیل معتبر نیست",
+        "phoneRequired": "شماره تماس الزامی است",
+        "messageRequired": "لطفاً پروژه خود را توضیح دهید",
+        "messageMinLength": "پیام باید حداقل ۱۰ کاراکتر باشد"
+      }
+    },
+    "social": {
+      "github": "گیت‌هاب",
+      "telegram": "تلگرام",
+      "phone": "شماره تماس"
     }
   },
   "summaryProjects": {

@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 
-import { parseCreateProjectForm } from "@/lib/api/projects";
-import { uploadProjectImage } from "@/lib/cloudinary";
-import { prisma } from "@/lib/prisma";
+import { parseCreateProjectForm } from "@/app/helper/projects/projects";
+import { uploadProjectImage } from "@/app/configs/cloudinary/cloudinary";
+import { prisma } from "@/app/helper/prisma/prisma";
 
 export const dynamic = "force-dynamic";
 
-export type { Project, CreateProjectInput } from "@/lib/types/project";
+export type { Project, CreateProjectInput } from "@/app/types/projects.type";
 
 function logRouteError(route: string, error: unknown) {
   const message = error instanceof Error ? error.message : String(error);
@@ -22,10 +22,7 @@ export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const page = parsePositiveInt(searchParams.get("page"), 1);
-    const limit = Math.min(
-      50,
-      parsePositiveInt(searchParams.get("limit"), 4),
-    );
+    const limit = Math.min(50, parsePositiveInt(searchParams.get("limit"), 4));
     const skip = (page - 1) * limit;
 
     const [projects, total] = await Promise.all([

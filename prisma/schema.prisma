@@ -23,3 +23,19 @@ model Project {
 
   @@map("projects")
 }
+
+model ContactMessage {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  fullName  String
+  email     String
+  phone     String
+  message   String
+  locale    String?
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([createdAt(sort: Desc)])
+  @@index([read])
+  @@map("contact_messages")
+}

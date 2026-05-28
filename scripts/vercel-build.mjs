@@ -4,16 +4,12 @@ function run(command) {
   execSync(command, { stdio: "inherit" });
 }
 
+// Generate client only — no live DB required (prisma.config.ts supplies a Mongo URL for generate).
 run("prisma generate");
 
-if (process.env.DATABASE_URL) {
-  run("prisma db push");
-} else {
-  console.warn(
-    "\n⚠ DATABASE_URL is not set — skipping prisma db push.\n" +
-      "  Add DATABASE_URL in Vercel → Settings → Environment Variables,\n" +
-      "  then redeploy so the schema syncs and the API can reach the database.\n",
-  );
-}
+// ! Do not run `prisma db push` here. Vercel build must not depend on Atlas.
+// ? Sync schema manually after deploy: `pnpm db:push` with a valid local DATABASE_URL.
+// ? On Vercel → Settings → Environment Variables, set DATABASE_URL to:
+// ?   mongodb+srv://USER:PASS@cluster....mongodb.net/ys-app?retryWrites=true&w=majority
 
 run("next build");

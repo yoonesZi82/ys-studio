@@ -4,8 +4,8 @@ import { AnimatePresence } from "framer-motion";
 
 import { OfflineNetworkDialog } from "@/components/site-experience/OfflineNetworkDialog";
 import { SiteLoadingSplash } from "@/components/site-experience/SiteLoadingSplash";
-import { useAppReady } from "@/components/site-experience/use-app-ready";
-import { useOnlineStatus } from "@/components/site-experience/use-online-status";
+import { useAppReady } from "@/app/hooks/loading/use-app-ready";
+import { useOnlineStatus } from "@/app/hooks/ofline/use-online-status";
 import { cn } from "@/lib/utils";
 
 export default function SiteExperience({

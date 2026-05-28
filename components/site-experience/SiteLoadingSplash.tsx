@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Loader2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-import type { AppReadyPhase } from "@/components/site-experience/use-app-ready";
+import type { AppReadyPhase } from "@/app/hooks/loading/use-app-ready";
 import { cn } from "@/lib/utils";
 
 type SiteLoadingSplashProps = {
@@ -17,7 +17,7 @@ export function SiteLoadingSplash({ phase, progress }: SiteLoadingSplashProps) {
 
   return (
     <motion.div
-      className="fixed inset-0 z-[90] flex flex-col justify-center items-center bg-background/95 backdrop-blur-md"
+      className="z-[90] fixed inset-0 flex flex-col justify-center items-center bg-background/95 backdrop-blur-md"
       initial={{ opacity: 1 }}
       animate={{ opacity: phase === "exiting" ? 0 : 1 }}
       exit={{ opacity: 0 }}
@@ -63,18 +63,18 @@ export function SiteLoadingSplash({ phase, progress }: SiteLoadingSplashProps) {
           </p>
         </div>
 
-        <div className="w-full space-y-2">
+        <div className="space-y-2 w-full">
           <div className="bg-muted/80 rounded-full w-full h-1.5 overflow-hidden">
             <motion.div
               className={cn(
-                "bg-linear-to-r from-primary via-primary/80 to-primary h-full rounded-full",
+                "bg-linear-to-r from-primary via-primary/80 to-primary rounded-full h-full",
               )}
               initial={{ width: "0%" }}
               animate={{ width: `${Math.round(progress)}%` }}
               transition={{ duration: 0.35, ease: "easeOut" }}
             />
           </div>
-          <p className="font-medium text-muted-foreground text-xs tabular-nums">
+          <p className="font-medium tabular-nums text-muted-foreground text-xs">
             {Math.round(progress)}%
           </p>
         </div>

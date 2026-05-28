@@ -1,5 +1,6 @@
-import { NextIntlClientProvider } from "next-intl";
 import React from "react";
+
+import { NextIntlClientProviderWithErrors } from "@/providers/next-intl-client-provider";
 
 async function NextIntelProvider({
   children,
@@ -10,9 +11,9 @@ async function NextIntelProvider({
 }) {
   const messages = (await import(`../messages/${locale}.json`)).default;
   return (
-    <NextIntlClientProvider locale={locale} messages={messages}>
+    <NextIntlClientProviderWithErrors locale={locale} messages={messages}>
       {children}
-    </NextIntlClientProvider>
+    </NextIntlClientProviderWithErrors>
   );
 }
 

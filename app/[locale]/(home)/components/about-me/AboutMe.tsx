@@ -1,6 +1,9 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
-import React from "react";
+import { useLocale, useTranslations } from "next-intl";
+import { cn } from "@/lib/utils";
 
 const skills = [
   "React",
@@ -23,43 +26,42 @@ const skills = [
 ];
 
 function AboutMe() {
+  const t = useTranslations("about");
+  const locale = useLocale();
+  const isRtl = locale === "fa";
+
   return (
     <section
       id="about"
-      className="w-full flex flex-col lg:flex-row gap-3 lg:gap-20 scroll-mt-24"
+      className="flex lg:flex-row flex-col gap-3 lg:gap-20 w-full scroll-mt-24"
     >
-      {/* <div className="flex-[0.6] overflow-hidden h-[300px] md:h-[500px] rounded-lg border border-border shadow-sm relative"> */}
       <Image
-        src="/miles.png"
-        alt="miles"
+        src="/me.jpg"
+        alt={t("imageAlt")}
         width={500}
         height={500}
-        className="object-cover flex-[0.6] border border-border shadow-sm rounded-xl"
+        className="flex-[0.6] shadow-sm border border-border rounded-xl object-cover"
         loading="eager"
       />
-      {/* </div> */}
 
-      <div className="w-full justify-center flex-1 flex flex-col gap-4">
+      <div className="flex flex-col flex-1 justify-center gap-4 w-full">
         <div className="space-y-2">
-          <h2
-            className="text-4xl text-center lg:text-start
-           font-semibold text-foreground leading-tight"
-          >
-            Yoones Zamani
-            <span className="text-primary"> Fullstack Developer </span>
+          <h2 className="font-semibold text-foreground text-4xl text-center lg:text-start leading-tight">
+            {t("title")}
+            <span className="text-primary"> {t("titleHighlight")} </span>
           </h2>
 
-          <p className="text-foreground/80 leading-7 pr-0 lg:pr-10 text-center lg:text-start">
-            I craft full-stack applications with the mindset of both an engineer
-            and a product designer building scalable backends, seamless APIs,
-            and responsive interfaces that feel effortless to use. My approach
-            connects robust system architecture with clean, intuitive user
-            experiences, turning complex technical challenges into products
-            people genuinely enjoy interacting with.
+          <p
+            className={cn(
+              "text-foreground/80 text-center lg:text-start leading-7",
+              isRtl ? "text-right pl-10 lg:pr-0 " : "text-left pr-0 lg:pr-10 ",
+            )}
+          >
+            {t("description")}
           </p>
         </div>
 
-        <div className="flex flex-wrap justify-center items-center lg:justify-start lg:items-start gap-2">
+        <div className="flex flex-wrap justify-center lg:justify-start items-center lg:items-start gap-2">
           {skills.map((skill) => (
             <Badge key={skill} size="lg" rounded="md" variant="outline">
               {skill}

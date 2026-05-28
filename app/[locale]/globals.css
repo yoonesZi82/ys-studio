@@ -367,3 +367,50 @@ html {
   border-color: hsl(var(--primary)) !important;
   box-shadow: 0 0 0 1px hsl(var(--primary)) !important;
 }
+
+[dir="rtl"] .phone-input-container .react-tel-input .flag-dropdown {
+  left: auto !important;
+  right: 0 !important;
+  border-radius: 0 1rem 1rem 0 !important;
+}
+
+[dir="rtl"] .phone-input-container .react-tel-input .selected-flag {
+  padding: 0 0.5rem 0 0 !important;
+  border-radius: 0 1rem 1rem 0 !important;
+}
+
+[dir="rtl"] .phone-input-container .react-tel-input .selected-flag .arrow {
+  left: auto !important;
+  right: 1.25rem !important;
+}
+
+[dir="rtl"] .phone-input-container .react-tel-input .form-control {
+  padding-left: 1.25rem !important;
+  padding-right: 3rem !important;
+  direction: ltr !important;
+  text-align: left !important;
+}
+
+[dir="rtl"] .phone-input-container .react-tel-input .country-list {
+  right: 0 !important;
+  left: auto !important;
+  direction: rtl !important;
+  text-align: right !important;
+}
+
+[dir="rtl"] .phone-input-container .react-tel-input .country-list .flag {
+  margin-right: 0 !important;
+  margin-left: 0.4375rem !important;
+}
+
+[dir="rtl"] .phone-input-container .react-tel-input .flag-dropdown.open {
+  border-radius: 0 1rem 0 0 !important;
+}
+
+[dir="rtl"] .phone-input-container .react-tel-input .flag-dropdown.open .selected-flag {
+  border-radius: 0 1rem 0 0 !important;
+}
+
+[dir="rtl"] .phone-input-container .react-tel-input .country-list .search {
+  direction: rtl !important;
+}

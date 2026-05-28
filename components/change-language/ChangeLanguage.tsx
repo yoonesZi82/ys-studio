@@ -1,20 +1,25 @@
 "use client";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Button } from "../ui/button";
 import { useLocale } from "next-intl";
 import { Check, ChevronDown } from "lucide-react";
+import { setLocale } from "@/utils/helper";
 
 function ChangeLanguage() {
-  const router = useRouter();
   const locale = useLocale();
   const [open, setOpen] = useState(false);
 
   const changeLanguage = (newLocale: string) => {
-    document.cookie = `locale=${newLocale}; path=/; max-age=31536000`;
+    if (newLocale === locale) {
+      setOpen(false);
+      return;
+    }
+    setLocale(newLocale);
     setOpen(false);
-    router.refresh();
+    // Full navigation: router.refresh() re-renders next-themes' inline <script>
+    // on the client, which triggers React 19's script-in-component warning.
+    window.location.reload();
   };
 
   const languages = {

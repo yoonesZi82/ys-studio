@@ -28,6 +28,65 @@
     "buttons": {
       "startProject": "Start Project",
       "viewProjects": "View Projects"
+    },
+    "terminal": {
+      "whoamiCmd": "$ whoami",
+      "whoamiOutput": "Yoones Zamani - Full Stack Developer",
+      "skillsCmd": "$ cat skills.txt",
+      "frontend": "✔ Frontend: React, Next.js, TypeScript, Tailwind",
+      "backend": "✔ Backend: Node.js, Express, NestJS, Python",
+      "database": "✔ Database: PostgreSQL, MongoDB, Redis, Prisma",
+      "devops": "✔ DevOps: Docker, Git, CI/CD, Linux",
+      "passionCmd": "$ echo $PASSION",
+      "passion": "Transforming ideas into production-ready full-stack solutions",
+      "statusCmd": "$ status --current",
+      "statusAvailable": "Available for freelance projects"
+    }
+  },
+  "about": {
+    "imageAlt": "Yoones Zamani",
+    "title": "Yoones Zamani",
+    "titleHighlight": "Fullstack Developer",
+    "description": "I craft full-stack applications with the mindset of both an engineer and a product designer building scalable backends, seamless APIs, and responsive interfaces that feel effortless to use. My approach connects robust system architecture with clean, intuitive user experiences, turning complex technical challenges into products people genuinely enjoy interacting with."
+  },
+  "contact": {
+    "heading": {
+      "line1": "Work With",
+      "line1Highlight": "Me"
+    },
+    "description": "Looking for a Full-Stack Developer to build scalable web apps, modern frontends, or robust backend systems? Let's build something powerful together.",
+    "form": {
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "John Doe",
+      "email": "Email Address",
+      "emailPlaceholder": "email@example.com",
+      "phone": "Phone Number",
+      "phoneSearchPlaceholder": "Search country",
+      "phoneSearchNotFound": "No country found",
+      "message": "Project Details",
+      "messagePlaceholder": "Describe your project...",
+      "submit": "Send Project Request",
+      "submitting": "Sending...",
+      "loadingTitle": "Sending your message",
+      "loadingSubtitle": "Hang tight — this only takes a moment.",
+      "alertErrorTitle": "Could not send your message",
+      "alertSuccessTitle": "Message delivered",
+      "alertDismiss": "Dismiss",
+      "submitSuccess": "Your message was sent successfully. I'll get back to you soon.",
+      "submitError": "Something went wrong. Please try again.",
+      "errors": {
+        "fullNameRequired": "Full name is required",
+        "emailRequired": "Email is required",
+        "emailInvalid": "Invalid email address",
+        "phoneRequired": "Phone number is required",
+        "messageRequired": "Please describe your project",
+        "messageMinLength": "Message must be at least 10 characters"
+      }
+    },
+    "social": {
+      "github": "GitHub",
+      "telegram": "Telegram",
+      "phone": "Phone number"
     }
   },
   "summaryProjects": {
