@@ -23,7 +23,7 @@ export type UpdateContactMessageInput = {
   email?: string;
   phone?: string;
   message?: string;
-  locale?: string;
+  locale?: string | null;
   read?: boolean;
 };
 
