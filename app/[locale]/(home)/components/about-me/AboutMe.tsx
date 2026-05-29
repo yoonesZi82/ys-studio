@@ -4,10 +4,7 @@ import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
-import {
-  ABOUT_IMAGE_FALLBACK,
-  ABOUT_PROFILE_IMAGE,
-} from "@/app/helper/other";
+import { ABOUT_IMAGE_FALLBACK, ABOUT_PROFILE_IMAGE } from "@/app/helper/other";
 import { cn } from "@/lib/utils";
 
 const skills = [
@@ -65,7 +62,9 @@ function AboutMe() {
           <p
             className={cn(
               "text-foreground/80 text-center lg:text-start leading-7",
-              isRtl ? "text-right pl-10 lg:pr-0 " : "text-left pr-0 lg:pr-10 ",
+              isRtl
+                ? "text-center lg:text-start pl-10 lg:pr-0 "
+                : "text-center lg:text-start pr-0 lg:pr-10 ",
             )}
           >
             {t("description")}

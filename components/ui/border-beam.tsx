@@ -34,6 +34,10 @@ interface BorderBeamProps {
    */
   className?: string;
   /**
+   * The class name of the border beam container (mask wrapper).
+   */
+  containerClassName?: string;
+  /**
    * The style of the border beam.
    */
   style?: React.CSSProperties;
@@ -53,6 +57,7 @@ interface BorderBeamProps {
 
 export const BorderBeam = ({
   className,
+  containerClassName,
   size = 50,
   delay = 0,
   duration = 6,
@@ -66,7 +71,10 @@ export const BorderBeam = ({
 }: BorderBeamProps) => {
   return (
     <div
-      className="pointer-events-none absolute inset-0 rounded-[inherit] border-(length:--border-beam-width) border-transparent mask-[linear-gradient(transparent,transparent),linear-gradient(#000,#000)] mask-intersect [mask-clip:padding-box,border-box]"
+      className={cn(
+        "pointer-events-none absolute inset-0 rounded-[inherit] border-(length:--border-beam-width) border-transparent mask-[linear-gradient(transparent,transparent),linear-gradient(#000,#000)] mask-intersect [mask-clip:padding-box,border-box]",
+        containerClassName,
+      )}
       style={
         {
           "--border-beam-width": `${borderWidth}px`,

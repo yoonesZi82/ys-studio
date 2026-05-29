@@ -12,7 +12,7 @@ async function InfoPart() {
   const isRtl = locale === "fa";
 
   return (
-    <div className="flex flex-col justify-center items-center lg:justify-start lg:items-start gap-8 w-full text-center lg:text-start">
+    <div className="flex flex-col justify-center items-center lg:justify-start lg:items-start gap-4 lg:gap-8 w-full text-center lg:text-start">
       <Badge
         variant="outline"
         className={cn(

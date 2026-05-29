@@ -97,7 +97,7 @@ function ContactMe() {
         error={submitError}
         onDismissError={() => setSubmitError(null)}
       />
-      <div className="top-0 left-1/2 absolute bg-primary/20 blur-[160px] rounded-full w-125 h-125 -translate-x-1/2 pointer-events-none" />
+      <div className="top-0 left-1/2 absolute bg-primary/15 md:bg-primary/20 blur-[100px] md:blur-[160px] rounded-full w-80 h-80 md:w-125 md:h-125 -translate-x-1/2 pointer-events-none" />
 
       <div className="z-10 relative container">
         <div className="mx-auto mb-16 max-w-3xl text-center">
@@ -113,7 +113,7 @@ function ContactMe() {
           </p>
         </div>
 
-        <div className="relative mx-auto p-[1.5px] rounded-[42px] max-w-5xl overflow-hidden">
+        <div className="relative mx-auto rounded-[42px] max-w-5xl overflow-hidden">
           <div className="relative bg-card rounded-[40px]">
             <Card className="relative bg-card/95 shadow-2xl backdrop-blur-xl p-6 md:p-10 border border-border/50 rounded-[40px] overflow-hidden">
               <form
@@ -267,7 +267,7 @@ function ContactMe() {
                 <Button
                   type="submit"
                   disabled={isFormLocked}
-                  className="bg-primary hover:shadow-[0_0_45px_hsl(var(--primary)/0.5)] rounded-2xl w-full h-16 font-semibold text-primary-foreground text-lg hover:scale-[1.01] transition-all duration-300"
+                  className="bg-primary hover:shadow-[0_0_45px_hsl(var(--primary)/0.5)] rounded-2xl w-full h-16 font-semibold text-primary-foreground lg:text-lg hover:scale-[1.01] transition-all duration-300"
                 >
                   <span className="flex items-center gap-3 uppercase tracking-wide">
                     <Send size={20} />
@@ -279,7 +279,7 @@ function ContactMe() {
 
                 <div className="bg-gradient-to-r from-transparent to-transparent via-border w-full h-px" />
 
-                <div className="flex flex-wrap justify-center items-center gap-8 pt-2">
+                <div className="flex flex-wrap justify-center items-center lg:gap-8 gap-4 pt-2 w-full">
                   <Link
                     href="https://github.com/yoonesZi82"
                     target="_blank"
@@ -305,7 +305,7 @@ function ContactMe() {
                     className="flex items-center gap-2 text-muted-foreground hover:text-primary text-lg transition"
                   >
                     <Phone size={20} className="shrink-0" aria-hidden />
-                    {t("social.phone")} (+989912209730)
+                    {t("social.phone")}
                   </Link>
                 </div>
               </form>
@@ -322,9 +322,18 @@ function ContactMe() {
 
               <BorderBeam
                 duration={8}
+                size={44}
+                colorFrom="#006239"
+                colorTo="#72e3ad"
+                containerClassName="md:hidden"
+                className="blur-xl opacity-60"
+              />
+              <BorderBeam
+                duration={8}
                 size={100}
                 colorFrom="#006239"
                 colorTo="#72e3ad"
+                containerClassName="max-md:hidden"
               />
             </Card>
           </div>
